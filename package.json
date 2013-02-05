@@ -1,0 +1,15 @@
+{
+    "name": "dummy-server",
+    "preferGlobal": false,
+    "version": "0.0.1",
+    "author": "TomoWang <tomo_wang@163.com>",
+    "description": "a dummy server provide status code simulation, and delay mechanism",
+    "keywords": [
+        "dummy",
+        "status code",
+        "server"
+    ],
+    "dependencies": {
+        "router": ">0.6.2"
+    }
+}
