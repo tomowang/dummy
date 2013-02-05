@@ -34,10 +34,14 @@ route.get('/', function(req, res) {
 route.get('/default', function(req, res) {
     var query = querystring.parse(url.parse(req.url).query),
         code = parseInt(query['code'], 10),
+        delay = parseInt(query['delay'], 10),
         length = parseInt(query['length'], 10);
     console.log('default url request query: ' + url.parse(req.url).query);
     if(isNaN(code) || !http.STATUS_CODES.hasOwnProperty(code)){
         code = 200;     // default 200 OK
+    }
+    if(isNaN(delay) || delay < 0){
+        delay = 0;  // default no delay
     }
     if(isNaN(length) || length <= 0){
         length = 16;  // default 1024 length
@@ -48,7 +52,7 @@ route.get('/default', function(req, res) {
     });
     setTimeout(function(){
         res.end(random_str(length));
-    }, 200);    // send the response after 200ms
+    }, delay);    // delay to send out the response
 });
 
 route.get('/{digits}([0-9]+)', function(req, res) {
