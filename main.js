@@ -21,7 +21,7 @@ for(var code in http.STATUS_CODES){
                 console.log('route: ' + c);
                 res.writeHead(c);
                 res.end(c);
-            }
+            };
         }(code));
     }
 }
@@ -33,9 +33,9 @@ route.get('/', function(req, res) {
 
 route.get('/default', function(req, res) {
     var query = querystring.parse(url.parse(req.url).query),
-        code = parseInt(query['code'], 10),
-        delay = parseInt(query['delay'], 10),
-        length = parseInt(query['length'], 10);
+        code = parseInt(query.code, 10),
+        delay = parseInt(query.delay, 10),
+        length = parseInt(query.length, 10);
     console.log('default url request query: ' + url.parse(req.url).query);
     if(isNaN(code) || !http.STATUS_CODES.hasOwnProperty(code)){
         code = 200;     // default 200 OK
@@ -63,5 +63,5 @@ route.get('/{digits}([0-9]+)', function(req, res) {
     res.end(random_str(parseInt(req.params.digits, 10)));
 });
 
-http.createServer(route).listen(8080); // start the server on port 8080
-console.log('server listen on 8080');
+http.createServer(route).listen(process.env.PORT); // start the server
+console.log('server start');
